@@ -1,26 +1,40 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = "com.tom.draughts.Main"
+mainClassName = ''
 
 repositories {
-    jcenter()
+  jcenter()
 }
 
 dependencies {
-    // Logger api
-    compile 'org.slf4j:slf4j-api:1.7.21'
-    // Logger impl
-    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+  // Logger api
+  compile 'org.slf4j:slf4j-api:1.7.21'
 
-    testCompile 'junit:junit:4.12'
+  // Logger impl
+  compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+
+  testCompile 'junit:junit:4.12'
 }
 
 jar {
   baseName = 'draughts'
-    version =  '0.1.0'
+  version =  '0.1.0'
 }
 
 run {
-  classpath += files('config/logger')
+    classpath += files('config/logger')
 }
+
+task runClient(type: JavaExec) {
+    main = "com.tom.draughts.client.Client"
+    classpath = sourceSets.main.runtimeClasspath
+    classpath += files('config/logger')
+}
+
+task runServer(type: JavaExec) {
+    main = "com.tom.draughts.server.Server"
+    classpath = sourceSets.main.runtimeClasspath
+    classpath += files('config/logger')
+}
+
