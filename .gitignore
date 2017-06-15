@@ -1,4 +1,6 @@
 *.swp
 .gradle
 build
+.idea
+draughts.iml
 
