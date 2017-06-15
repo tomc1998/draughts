@@ -1,0 +1,26 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "com.tom.draughts.Main"
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    // Logger api
+    compile 'org.slf4j:slf4j-api:1.7.21'
+    // Logger impl
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+
+    testCompile 'junit:junit:4.12'
+}
+
+jar {
+  baseName = 'draughts'
+    version =  '0.1.0'
+}
+
+run {
+  classpath += files('config/logger')
+}
