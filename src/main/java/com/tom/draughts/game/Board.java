@@ -5,10 +5,10 @@ import com.tom.draughts.game.BoardCell;
 /** The board class. This is a 3x3 draughts board (though i've seen pictures
  * for 5x5). */
 public class Board {
-  final int BOARD_SIZE = 8;
+  public static final int BOARD_SIZE = 8;
 
   /** 8x8 grid to represent the board data. */
-  BoardCell[] boardData = new BoardCell[BOARD_SIZE*BOARD_SIZE];
+  public BoardCell[] boardData = new BoardCell[BOARD_SIZE*BOARD_SIZE];
 
   /** Create a new board, setting out the pieces to start a game. */
   public Board() {
@@ -74,5 +74,10 @@ public class Board {
       res.append("\n");
     }
     return res.toString();
+  }
+
+  /** Gets the cell value at a given x, y position */
+  public BoardCell getCell(int x, int y) {
+    return this.boardData[x + y * BOARD_SIZE];
   }
 }
