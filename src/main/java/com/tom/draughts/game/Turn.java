@@ -32,6 +32,7 @@ public class Turn {
     NotKing, /** The piece is being moved backwards but isn't a king */
     MoveOOB, /** A movement is out of bounds */
     TakeInvalid; /** Trying to make a move to take a piece which isn't there / is the wrong color */
+    SpaceBlocked; /** Space is blocked for taking */
 
     @Override
     public String toString() {
@@ -48,6 +49,8 @@ public class Turn {
           return "MoveOOB";
         case TakeInvalid: 
           return "TakeInvalid";
+        case SpaceBlocks: 
+          return "SpaceBlocked";
       }
       return "";
     }
@@ -125,6 +128,7 @@ public class Turn {
     // Keep track of current position of piece
     int currX = pieceX, currY = pieceY;
     for (MoveDirection m : movements) {
+      MoveDirection m = movements.get(ii);
       BoardCell c = null; // Get the board cell we're trying to jump over this turn
       int moveX = 0, moveY = 0; // How much we're moving with this turn
       switch (m) {
@@ -170,6 +174,11 @@ public class Turn {
           turnColor == PieceColor.White && (c == BoardCell.White || c == BoardCell.WhiteKing)) {
         return TurnValidResult.TakeInvalid;
       }
+      // Check the space we're jumping into is empty
+      if (board.getCell(currX + moveX, currY + moveY) != BoardCell.Empty) {
+        return TurnValidResult.SpaceBlocked;
+      }
+
       // If we're here the movement is valid, alter currX and currY for the
       // next loop, using the moveX and moveY we calculated earlier. Also, add
       // to the positionsJumped array.
