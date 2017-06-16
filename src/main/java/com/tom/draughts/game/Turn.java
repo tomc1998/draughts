@@ -4,6 +4,17 @@ import java.util.ArrayList;
 
 /** A class to represent a turn taken by a player. */
 public class Turn {
+
+  /** Private constructor to create a new turn with a given color. */
+  private Turn(PieceColor color) { turnColor = color; }
+
+  public static Turn createWhiteTurn() {
+    return new Turn(PieceColor.White);
+  }
+  public static Turn createBlackTurn() {
+    return new Turn(PieceColor.Black);
+  }
+
   /**
    * The list of movements to be taken this turn
    */

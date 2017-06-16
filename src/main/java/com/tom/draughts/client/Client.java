@@ -15,7 +15,7 @@ public class Client {
     logger.debug(b.toString());
 
     // Construct a turn, then apply to the board
-    Turn t = new Turn();
+    Turn t = Turn.createBlackTurn();
     t.setPiecePosition(1, 2);
     t.movements.add(MoveDirection.DownRight);
 
