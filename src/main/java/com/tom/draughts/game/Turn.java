@@ -124,8 +124,7 @@ public class Turn {
     ArrayList<Integer> positionsJumped = new ArrayList<>();
     // Keep track of current position of piece
     int currX = pieceX, currY = pieceY;
-    for (int ii = 0; ii < movements.size() - 1; ++ii) {
-      MoveDirection m = movements.get(ii);
+    for (MoveDirection m : movements) {
       BoardCell c = null; // Get the board cell we're trying to jump over this turn
       int moveX = 0, moveY = 0; // How much we're moving with this turn
       switch (m) {
@@ -158,6 +157,12 @@ public class Turn {
           c = board.getCell(currX + 1, currY + 1);
           break;
       }
+      // Check we haven't already jumped this position
+      for (Integer ii : positionsJumped) {
+        if (ii.intValue() == (currX + moveX/2 + (currY + moveY/2) * Board.BOARD_SIZE)) {
+          return TurnValidResult.TakeInvalid;
+        }
+      }
       // Check we're jumping over something, can't be empty
       if (c == BoardCell.Empty) { return TurnValidResult.TakeInvalid; } 
       // Check we're jumping over the right colour
@@ -166,7 +171,9 @@ public class Turn {
         return TurnValidResult.TakeInvalid;
       }
       // If we're here the movement is valid, alter currX and currY for the
-      // next loop, using the moveX and moveY we calculated earlier
+      // next loop, using the moveX and moveY we calculated earlier. Also, add
+      // to the positionsJumped array.
+      positionsJumped.add(currX + moveX/2 + (currY + moveY/2) * Board.BOARD_SIZE);
       currX += moveX;
       currY += moveY;
     }
