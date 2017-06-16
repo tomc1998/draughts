@@ -162,5 +162,14 @@ public class Board {
 
     // Finally, move the piece
     moveCell(t.pieceX, t.pieceY, currX, currY);
+
+    // Check if the destination is the end of the board for this turn's colour.
+    // If so, king the piece.
+    if (currY == 0 && t.getTurnColor() == PieceColor.Black) {
+      setCell(currX, currY, BoardCell.BlackKing);
+    }
+    if (currY == BOARD_SIZE-1 && t.getTurnColor() == PieceColor.White) {
+      setCell(currX, currY, BoardCell.WhiteKing);
+    }
   }
 }

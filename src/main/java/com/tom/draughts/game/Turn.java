@@ -24,6 +24,8 @@ public class Turn {
     this.pieceY = posY;
   }
 
+  public PieceColor getTurnColor() { return turnColor; }
+
   /** An enum to represent the result returned by the isTurnValid function. */
   public enum TurnValidResult {
     Valid, /** Move is valid */
