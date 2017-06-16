@@ -14,12 +14,13 @@ public class Client {
     Board b = new Board();
     logger.debug(b.toString());
 
-    // Construct a turn, check if valid
+    // Construct a turn, then apply to the board
     Turn t = new Turn();
     t.setPiecePosition(1, 2);
     t.movements.add(MoveDirection.DownRight);
 
-    logger.debug(t.isTurnValid(b).toString());
+    b.applyTurn(t);
+    logger.debug(b.toString());
   }
 }
 
