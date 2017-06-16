@@ -26,8 +26,8 @@ run {
     classpath += files('config/logger')
 }
 
-task runClient(type: JavaExec) {
-    main = "com.tom.draughts.client.Client"
+task runTestAI(type: JavaExec) {
+    main = "com.tom.draughts.ai.TestAI"
     classpath = sourceSets.main.runtimeClasspath
     classpath += files('config/logger')
 }
